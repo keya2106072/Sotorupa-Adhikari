@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Sotorupa — Fisheries &amp; Aquatic Science</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --deep:#0B2E3D;
+    --panel:#0E3D4F;
+    --panel-2:#123F52;
+    --sand:#F5F1E8;
+    --sand-dim:#C9C2B3;
+    --seagrass:#4A9B8E;
+    --brass:#C9A15F;
+    --line: rgba(245,241,232,0.14);
+    box-sizing:border-box;
+    padding-top:env(safe-area-inset-top,0px);
+    padding-bottom:env(safe-area-inset-bottom,0px);
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;scroll-padding-top:env(safe-area-inset-top,0px);}
+  body{
+    background:var(--deep);
+    color:var(--sand);
+    font-family:'Inter',sans-serif;
+    line-height:1.6;
+    overflow-x:hidden;
+  }
+  body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    background:
+      radial-gradient(ellipse 80% 50% at 20% -10%, rgba(74,155,142,0.18), transparent 60%),
+      radial-gradient(ellipse 60% 40% at 100% 20%, rgba(201,161,95,0.08), transparent 60%);
+    pointer-events:none;
+    z-index:0;
+  }
+  .wrap{max-width:840px; margin:0 auto; padding:0 28px; position:relative; z-index:1;}
+
+  h1,h2,h3{font-family:'Fraunces',serif; font-weight:500; letter-spacing:-0.01em;}
+
+  header{padding:28px 0; border-bottom:1px solid var(--line);}
+  header .wrap{display:flex; justify-content:space-between; align-items:center;}
+  .brand{font-family:'Fraunces',serif; font-size:1.1rem; font-weight:600; color:var(--sand);}
+  nav{display:flex; gap:28px;}
+  nav a{color:var(--sand-dim); text-decoration:none; font-size:0.92rem; transition:color .2s;}
+  nav a:hover{color:var(--seagrass);}
+
+  .hero{padding:96px 0 88px;}
+  .hero .kicker{
+    color:var(--brass);
+    font-size:0.95rem;
+    margin-bottom:18px;
+    font-family:'Fraunces',serif;
+    font-style:italic;
+  }
+  .hero h1{
+    font-size:clamp(2.4rem, 6vw, 4rem);
+    line-height:1.08;
+    max-width:11ch;
+    color:var(--sand);
+  }
+  .hero p.lede{
+    max-width:52ch;
+    font-size:1.15rem;
+    color:var(--sand-dim);
+    margin-top:26px;
+  }
+  .hero .cta-row{display:flex; gap:16px; margin-top:38px; flex-wrap:wrap;}
+  .btn{
+    display:inline-block;
+    padding:13px 26px;
+    border-radius:3px;
+    text-decoration:none;
+    font-size:0.95rem;
+    font-weight:500;
+    transition:transform .2s, background .2s;
+  }
+  .btn-primary{background:var(--seagrass); color:var(--deep);}
+  .btn-primary:hover{background:#5CAF9F; transform:translateY(-1px);}
+  .btn-ghost{border:1px solid var(--line); color:var(--sand);}
+  .btn-ghost:hover{border-color:var(--seagrass); color:var(--seagrass);}
+
+  section{padding:70px 0; border-top:1px solid var(--line);}
+  .section-head{display:flex; align-items:baseline; gap:16px; margin-bottom:36px;}
+  .section-num{color:var(--brass); font-family:'Fraunces',serif; font-style:italic; font-size:1rem;}
+  section h2{font-size:1.8rem; color:var(--sand);}
+
+  .about-grid{display:grid; grid-template-columns:1.4fr 1fr; gap:56px;}
+  .about-grid p{color:var(--sand-dim); margin-bottom:16px; max-width:58ch;}
+  .about-grid p:last-child{margin-bottom:0;}
+  .fact-panel{
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-radius:6px;
+    padding:26px;
+    align-self:start;
+  }
+  .fact-panel dt{color:var(--brass); font-size:0.82rem; text-transform:uppercase; letter-spacing:0.04em; margin-top:16px;}
+  .fact-panel dt:first-child{margin-top:0;}
+  .fact-panel dd{color:var(--sand); font-size:0.98rem; margin-top:4px;}
+
+  .interests{display:grid; grid-template-columns:repeat(3,1fr); gap:20px;}
+  .interest-card{
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-radius:6px;
+    padding:26px 22px;
+  }
+  .interest-card h3{font-size:1.1rem; color:var(--seagrass); margin-bottom:10px; font-weight:500;}
+  .interest-card p{color:var(--sand-dim); font-size:0.92rem;}
+
+  .timeline{border-left:2px solid var(--line); margin-left:6px;}
+  .t-item{padding:0 0 34px 30px; position:relative;}
+  .t-item:last-child{padding-bottom:0;}
+  .t-item::before{
+    content:"";
+    position:absolute;
+    left:-7px; top:4px;
+    width:12px; height:12px;
+    border-radius:50%;
+    background:var(--deep);
+    border:2px solid var(--seagrass);
+  }
+  .t-item .t-year{color:var(--brass); font-size:0.85rem; font-family:'Fraunces',serif; font-style:italic;}
+  .t-item h3{font-size:1.15rem; margin-top:4px; color:var(--sand);}
+  .t-item .t-sub{color:var(--sand-dim); font-size:0.95rem; margin-top:2px;}
+  .t-item .t-detail{color:var(--sand-dim); font-size:0.92rem; margin-top:8px; max-width:56ch;}
+
+  .skills-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:36px;}
+  .skill-group h3{font-size:1rem; color:var(--brass); margin-bottom:14px; font-weight:500;}
+  .skill-list{list-style:none;}
+  .skill-list li{
+    color:var(--sand-dim);
+    padding:10px 0;
+    border-bottom:1px solid var(--line);
+    font-size:0.95rem;
+    display:flex;
+    justify-content:space-between;
+  }
+  .skill-list li:last-child{border-bottom:none;}
+  .skill-list li span.tag{color:var(--seagrass); font-size:0.82rem;}
+
+  footer{padding:56px 0 70px; border-top:1px solid var(--line);}
+  .contact-row{display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:24px;}
+  footer h2{font-size:1.6rem; margin-bottom:12px;}
+  footer p{color:var(--sand-dim); max-width:44ch;}
+  .contact-links{display:flex; flex-direction:column; gap:10px; align-items:flex-end;}
+  .contact-links a{color:var(--sand); text-decoration:none; font-size:0.98rem; border-bottom:1px solid transparent;}
+  .contact-links a:hover{border-color:var(--seagrass); color:var(--seagrass);}
+  .fine{margin-top:40px; color:var(--sand-dim); font-size:0.82rem; opacity:0.7;}
+
+  @media (max-width: 720px){
+    .about-grid{grid-template-columns:1fr;}
+    .interests{grid-template-columns:1fr;}
+    .skills-grid{grid-template-columns:1fr;}
+    .contact-row{flex-direction:column; align-items:flex-start;}
+    .contact-links{align-items:flex-start;}
+    nav{gap:16px; font-size:0.85rem;}
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{transition:none !important;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="brand">Sotorupa</div>
+    <nav>
+      <a href="#about">About</a>
+      <a href="#research">Research</a>
+      <a href="#education">Education</a>
+      <a href="#skills">Skills</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <div class="kicker">Fisheries &amp; Aquatic Resource Management</div>
+    <h1>Studying how life in water adapts to a changing climate.</h1>
+    <p class="lede">I'm Sotorupa, a fisheries graduate and current Master's student focused on eco-physiology, climate change, and the blue economy — working at the intersection of aquatic biology and the systems that depend on it.</p>
+    <div class="cta-row">
+      <a href="#contact" class="btn btn-primary">Get in touch</a>
+      <a href="#research" class="btn btn-ghost">View research interests</a>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-num">01</span>
+      <h2>About</h2>
+    </div>
+    <div class="about-grid">
+      <div>
+        <p>I hold a BSc in Fisheries from Bangladesh Agricultural University, and I'm currently pursuing a Master's degree in Fisheries Management. My academic path has centered on understanding aquatic organisms not just as resources, but as living systems responding to environmental pressure.</p>
+        <p>My current interests sit at the intersection of eco-physiology — how organisms physiologically cope with environmental stress — climate change and its cascading effects on fish stocks and coastal communities, and the blue economy as a framework for sustainable, equitable use of aquatic resources.</p>
+      </div>
+      <dl class="fact-panel">
+        <dt>Location</dt>
+        <dd>Bangladesh</dd>
+        <dt>Degree</dt>
+        <dd>BSc Fisheries, CGPA 3.71</dd>
+        <dt>Institution</dt>
+        <dd>Bangladesh Agricultural University</dd>
+        <dt>Currently</dt>
+        <dd>MS in Fisheries Management</dd>
+      </dl>
+    </div>
+  </div>
+</section>
+
+<section id="research">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-num">02</span>
+      <h2>Research interests</h2>
+    </div>
+    <div class="interests">
+      <div class="interest-card">
+        <h3>Eco-physiology</h3>
+        <p>Investigating how fish and aquatic organisms physiologically respond and adapt to environmental stressors such as temperature, salinity, and oxygen variability.</p>
+      </div>
+      <div class="interest-card">
+        <h3>Climate change</h3>
+        <p>Examining the impact of shifting climate patterns on fisheries productivity, species distribution, and the resilience of aquaculture systems.</p>
+      </div>
+      <div class="interest-card">
+        <h3>Blue economy</h3>
+        <p>Exploring sustainable and equitable approaches to using marine and aquatic resources for economic growth without compromising ecosystem health.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="education">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-num">03</span>
+      <h2>Education</h2>
+    </div>
+    <div class="timeline">
+      <div class="t-item">
+        <div class="t-year">In progress</div>
+        <h3>MS in Fisheries Management</h3>
+        <div class="t-sub">Bangladesh Agricultural University</div>
+        <p class="t-detail">Continuing studies with a focus on eco-physiology, climate resilience, and blue economy frameworks within fisheries systems.</p>
+      </div>
+      <div class="t-item">
+        <div class="t-year">Completed</div>
+        <h3>BSc in Fisheries</h3>
+        <div class="t-sub">Bangladesh Agricultural University — CGPA 3.71</div>
+        <p class="t-detail">Foundational training in fisheries biology, aquaculture, and resource management, graduating with strong academic standing.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-num">04</span>
+      <h2>Skills &amp; interests</h2>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-group">
+        <h3>Academic &amp; field</h3>
+        <ul class="skill-list">
+          <li>Fisheries biology <span class="tag">core</span></li>
+          <li>Aquatic eco-physiology <span class="tag">focus</span></li>
+          <li>Climate impact assessment <span class="tag">focus</span></li>
+          <li>Aquaculture systems <span class="tag">core</span></li>
+        </ul>
+      </div>
+      <div class="skill-group">
+        <h3>Applied &amp; analytical</h3>
+        <ul class="skill-list">
+          <li>Blue economy policy <span class="tag">interest</span></li>
+          <li>Scientific writing</li>
+          <li>Data analysis</li>
+          <li>Research design</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="wrap">
+    <div class="contact-row">
+      <div>
+        <h2>Let's connect</h2>
+        <p>Open to research collaborations, academic opportunities, and conversations about fisheries, climate, and the blue economy.</p>
+      </div>
+      <div class="contact-links">
+        <a href="mailto:your.email@example.com">your.email@example.com</a>
+        <a href="https://linkedin.com/in/your-profile" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://github.com/your-username" target="_blank" rel="noopener">GitHub</a>
+      </div>
+    </div>
+    <p class="fine">© 2026 Sotorupa. Built with plain HTML &amp; CSS.</p>
+  </div>
+</footer>
+
+</body>
+</html>
